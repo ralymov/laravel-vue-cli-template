@@ -7,9 +7,9 @@
             <h5 class="card-title text-center">Вход</h5>
             <form class="form-signin">
               <div class="form-label-group">
-                <input id="inputEmail" class="form-control" placeholder="Имя пользователя" required
-                       autofocus v-model="credentials.username">
-                <label for="inputEmail">Имя пользователя</label>
+                <input id="inputEmail" class="form-control" placeholder="Email" required
+                       autofocus v-model="credentials.email">
+                <label for="inputEmail">Email</label>
               </div>
 
               <div class="form-label-group">
@@ -39,7 +39,7 @@ export default {
     return {
       credentials: {
         password: '',
-        username: '',
+        email: '',
       },
       remember: false,
     };
@@ -47,11 +47,12 @@ export default {
   methods: {
     ...mapActions('auth', ['login', 'setUser', 'logout']),
     submit() {
-      axios.post('login', this.credentials).then((response) => {
-        const credentials = response.data;
-        this.login(credentials);
-        this.getCurrentUser();
-        this.$router.push('/');
+      axios.post('auth/login', this.credentials).then((response) => {
+        console.log(response);
+        // const credentials = response.data;
+        // this.login(credentials);
+        // this.getCurrentUser();
+        // this.$router.push('/');
       });
     },
     getCurrentUser() {
