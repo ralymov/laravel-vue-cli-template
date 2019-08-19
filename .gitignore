@@ -14,6 +14,8 @@ public/js/*
 public/css/*
 public/img/*
 public/fonts/*
+public/*.js
+public/*.json
 public/mix-manifest.json
 
 storage/*.key
