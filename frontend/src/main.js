@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from './store/index';
 
 window.axios = require('axios');
 
 window.axios.defaults.baseURL = '/api/';
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-require('./services/errorResponseHandler');
+require('./common/error.handler');
 
 Vue.config.productionTip = false;
 

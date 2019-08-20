@@ -1,7 +1,7 @@
 import axios from 'axios';
 import SweetAlert from '../mixins/sweet-alert';
 
-function errorResponseHandler(error) {
+function errorHandler(error) {
   // check for errorHandle config
   if (error.config.errorHandle && error.config.errorHandle === false) {
     return Promise.reject(error);
@@ -19,7 +19,7 @@ function errorResponseHandler(error) {
 // apply interceptor on response
 axios.interceptors.response.use(
   response => response,
-  errorResponseHandler,
+  errorHandler,
 );
 
-export default errorResponseHandler;
+export default errorHandler;
