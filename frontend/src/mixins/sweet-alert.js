@@ -22,7 +22,7 @@ export default {
       });
     },
     confirm(callback, options) {
-      options = Object.assign({
+      const innerOptions = Object.assign({
         title: 'Are you sure?',
         text: 'Are you sure you want to do that?',
         type: 'warning',
@@ -32,7 +32,7 @@ export default {
         closeOnConfirm: false,
       }, options);
 
-      swal(options, callback);
+      swal(innerOptions, callback);
     },
   },
 };

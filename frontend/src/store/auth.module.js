@@ -29,21 +29,16 @@ const actions = {
   [LOGIN](context, credentials) {
     return new Promise((resolve) => {
       AuthService.login(credentials)
-        .then(({ data }) => {
-          context.commit(SET_AUTH, data.user);
-          resolve(data);
+        .then((user) => {
+          context.commit(SET_AUTH, user);
+          resolve(user);
         })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+        .catch((response) => {
+          context.commit(
+            SET_ERROR,
+            response.data && response.data.errors ? response.data.errors : response.data,
+          );
         });
-      // ApiService.post('users/login', { user: credentials })
-      //   .then(({ data }) => {
-      //     context.commit(SET_AUTH, data.user);
-      //     resolve(data);
-      //   })
-      //   .catch(({ response }) => {
-      //     context.commit(SET_ERROR, response.data.errors);
-      //   });
     });
   },
   [LOGOUT](context) {
@@ -105,7 +100,7 @@ const mutations = {
     state.isAuthenticated = true;
     state.user = user;
     state.errors = {};
-    saveToken(state.user.token);
+    saveToken(state.user.access_token);
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;

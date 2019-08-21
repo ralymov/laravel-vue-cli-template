@@ -31,34 +31,32 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import { LOGIN } from '@/store/actions.type';
+
 
 export default {
   name: 'Login',
   data() {
     return {
       credentials: {
-        password: '',
         email: '',
+        password: '',
       },
       remember: false,
     };
   },
+  computed: {
+    ...mapState({
+      errors: state => state.auth.errors,
+    }),
+  },
   methods: {
     ...mapActions('auth', ['login', 'setUser', 'logout']),
     submit() {
-      axios.post('auth/login', this.credentials).then((response) => {
-        console.log(response);
-        // const credentials = response.data;
-        // this.login(credentials);
-        // this.getCurrentUser();
-        // this.$router.push('/');
-      });
-    },
-    getCurrentUser() {
-      axios.get('/credentials')
-        .then(response => this.setUser(response.data))
-        .catch(error => this.logout());
+      this.$store
+        .dispatch(LOGIN, this.credentials)
+        .then(() => this.$router.push({ name: 'home' }));
     },
   },
 };

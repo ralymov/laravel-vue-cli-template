@@ -1,4 +1,11 @@
 import Vue from 'vue';
+import axios from 'axios';
+
+require('./error.handler');
+
+
+axios.defaults.baseURL = '/api/';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const ApiService = {
   async query(resource, params) {
@@ -12,7 +19,7 @@ const ApiService = {
   },
 
   async post(resource, params) {
-    const res = await Vue.axios.post(`${resource}`, params);
+    const res = await axios.post(`${resource}`, params);
     return res.data;
   },
 
@@ -35,7 +42,7 @@ const ApiService = {
 export default ApiService;
 
 export const AuthService = {
-  login(credentials) {
-    return ApiService.post('users/login', { user: credentials });
+  async login(credentials) {
+    return ApiService.post('auth/login', credentials);
   },
 };
