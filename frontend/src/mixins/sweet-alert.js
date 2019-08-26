@@ -21,18 +21,13 @@ export default {
         timer,
       });
     },
-    confirm(callback, options) {
-      const innerOptions = Object.assign({
-        title: 'Are you sure?',
-        text: 'Are you sure you want to do that?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText: 'Yes',
-        closeOnConfirm: false,
-      }, options);
-
-      swal(innerOptions, callback);
+    alertConfirm() {
+      return swal({
+        title: 'Подтверждение',
+        text: 'Вы уверены что хотите выполнить данное действие?',
+        icon: 'warning',
+        buttons: ['Отменить', true],
+      });
     },
   },
 };
