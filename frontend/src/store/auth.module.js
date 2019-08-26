@@ -12,7 +12,9 @@ import { SET_AUTH, PURGE_AUTH, SET_ERROR } from './mutations.type';
 
 const state = {
   errors: null,
-  user: {},
+  user: {
+    access_token: '',
+  },
   isAuthenticated: !!getToken(),
 };
 
@@ -46,10 +48,10 @@ const actions = {
   },
   [REGISTER](context, credentials) {
     return new Promise((resolve, reject) => {
-      ApiService.post('users', { user: credentials })
-        .then(({ data }) => {
-          context.commit(SET_AUTH, data.user);
-          resolve(data);
+      AuthService.register(credentials)
+        .then((user) => {
+          context.commit(SET_AUTH, user);
+          resolve(user);
         })
         .catch(({ response }) => {
           context.commit(SET_ERROR, response.data.errors);

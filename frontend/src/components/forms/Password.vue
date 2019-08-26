@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <span class="typcn typcn-eye" @click="showPassword=!showPassword">Show</span>
+  <div class="password-input-container">
+    <span class="typcn typcn-eye" @click="showPassword=!showPassword">
+      {{showPassword ? 'Hide' : 'Show'}}
+    </span>
     <input
       :type="showPassword ? 'text' : 'password'"
-      name="password"
-      placeholder="Password"
-      autocomplete="off"
+      :placeholder="placeholder"
+      :name="name"
       :value="value"
       @input="onInput($event.target.value)"
+      :required="required"
+      autocomplete="off"
     >
   </div>
 </template>
@@ -19,6 +22,18 @@ export default {
     value: {
       type: String,
       default: '',
+    },
+    placeholder: {
+      type: String,
+      default: 'Password',
+    },
+    name: {
+      type: String,
+      default: 'password',
+    },
+    required: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -34,6 +49,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .password-input-container {
+    position: relative;
+  }
 
+  .typcn {
+    position: absolute;
+    color: #8d92a2;
+    font-size: 16px;
+    cursor: pointer;
+    right: 50px;
+    top: 25%;
+  }
+
+  .typcn.active {
+    color: #7f60eb;
+  }
 </style>

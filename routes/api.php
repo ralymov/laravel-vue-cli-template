@@ -13,11 +13,11 @@
 
 Route::group(['namespace' => 'Api'], static function () {
 
-    Route::group(['prefix' => 'auth'], function () {
+    Route::group(['prefix' => 'auth'], static function () {
         Route::post('login', 'AuthController@login');
-        Route::post('signup', 'AuthController@signup');
+        Route::post('register', 'AuthController@register');
 
-        Route::group(['middleware' => 'auth:api'], function () {
+        Route::group(['middleware' => 'auth:api'], static function () {
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AuthController@user');
         });

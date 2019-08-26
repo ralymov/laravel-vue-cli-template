@@ -45,4 +45,7 @@ export const AuthService = {
   async login(credentials) {
     return ApiService.post('auth/login', credentials);
   },
+  async register(user) {
+    return ApiService.post('auth/register', user);
+  },
 };
