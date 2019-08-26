@@ -1,13 +1,17 @@
 <template>
-  <div class="animated bounceInDown">
+  <div>
     <div class="container">
-      <span class="error animated tada" id="msg"></span>
       <form name="form1" class="box" @submit.prevent="submit">
         <h4>Auth<span>Template</span></h4>
         <h5>Sign in to your account.</h5>
-        <input type="text" name="email" placeholder="Email" autocomplete="off">
-        <span class="typcn typcn-eye" id="eye">Show</span>
-        <input type="password" name="password" placeholder="Password" id="pwd" autocomplete="off">
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          autocomplete="off"
+          v-model="credentials.email"
+        >
+        <password v-model="credentials.password"></password>
         <label>
           <input type="checkbox">
           <span></span>
@@ -16,10 +20,17 @@
         <a href="#" class="forgetpass">Forget Password?</a>
         <input type="submit" value="Sign in" class="btn1">
       </form>
-      <a href="#" class="dnthave">Don’t have an account? Sign up</a>
+
+      <router-link to="register" class="dnthave">Don’t have an account? Sign up</router-link>
     </div>
+
     <div class="footer">
-      <span>Made by <a href="https://github.com/ralymov">Alymov Roman</a></span>
+      <span>
+        Made by
+        <a href="https://github.com/ralymov" rel="nofollow noopener" target="_blank">
+          Alymov Roman
+        </a>
+      </span>
     </div>
   </div>
 </template>
@@ -27,9 +38,13 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { LOGIN } from '@/store/actions.type';
+import Password from '../components/forms/Password.vue';
 
 export default {
   name: 'Login',
+  components: {
+    Password,
+  },
   data() {
     return {
       credentials: {
