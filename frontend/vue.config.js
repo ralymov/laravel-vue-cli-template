@@ -2,6 +2,8 @@ module.exports = {
   // proxy API requests to Valet during development
   devServer: {
     proxy: 'http://auth-template.test',
+    host: 'auth-template.local',
+    port: 8080,
   },
 
   // output built static files to Laravel's public dir.
