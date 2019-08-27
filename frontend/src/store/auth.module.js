@@ -43,9 +43,11 @@ const actions = {
         });
     });
   },
+
   [LOGOUT](context) {
     context.commit(PURGE_AUTH);
   },
+
   [REGISTER](context, credentials) {
     return new Promise((resolve, reject) => {
       AuthService.register(credentials)
@@ -59,11 +61,11 @@ const actions = {
         });
     });
   },
+
   [CHECK_AUTH](context) {
     if (getToken()) {
-      ApiService.setHeader();
-      ApiService.get('user')
-        .then(({ data }) => {
+      AuthService.user()
+        .then((data) => {
           context.commit(SET_AUTH, data.user);
         })
         .catch(({ response }) => {
@@ -73,6 +75,7 @@ const actions = {
       context.commit(PURGE_AUTH);
     }
   },
+
   [UPDATE_USER](context, payload) {
     const {
       email, username, password, image, bio,

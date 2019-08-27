@@ -61,6 +61,7 @@ export default {
     cursor: pointer;
     right: 50px;
     top: 25%;
+    z-index: 1;
   }
 
   .typcn.active {

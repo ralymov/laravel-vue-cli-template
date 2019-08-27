@@ -1,5 +1,5 @@
 import axios from 'axios';
-import SweetAlert from '../mixins/sweet-alert';
+import SweetAlert from '../mixins/alert.mixin';
 
 function errorHandler(error) {
   // check for errorHandle config
