@@ -14,6 +14,7 @@ const state = {
   errors: null,
   user: {
     access_token: '',
+    name: '',
   },
   isAuthenticated: !!getToken(),
 };
@@ -63,17 +64,24 @@ const actions = {
   },
 
   [CHECK_AUTH](context) {
-    if (getToken()) {
-      AuthService.user()
-        .then((data) => {
-          context.commit(SET_AUTH, data.user);
-        })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
-        });
-    } else {
-      context.commit(PURGE_AUTH);
-    }
+    return new Promise((resolve, reject) => {
+      if (getToken()) {
+        ApiService.setHeader();
+        AuthService.user()
+          .then((user) => {
+            console.log('CHECK_AUTH');
+            context.commit(SET_AUTH, user);
+            resolve(user);
+          })
+          .catch((error) => {
+            context.commit(SET_ERROR, error.response.data.errors);
+            reject(error);
+          });
+      } else {
+        context.commit(PURGE_AUTH);
+        reject();
+      }
+    });
   },
 
   [UPDATE_USER](context, payload) {
@@ -105,7 +113,9 @@ const mutations = {
     state.isAuthenticated = true;
     state.user = user;
     state.errors = {};
-    saveToken(state.user.access_token);
+    if (state.user.access_token) {
+      saveToken(state.user.access_token);
+    }
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;

@@ -1,20 +1,23 @@
 import axios from 'axios';
 import { getToken } from '@/common/jwt.service';
 
-require('./error.handler');
-
 axios.defaults.baseURL = '/api/';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`;
+// axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`;
+require('./error.handler');
 
 const ApiService = {
+  setHeader() {
+    axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`;
+  },
+
   async query(resource, params) {
     const res = await axios.get(resource, params);
     return res.data;
   },
 
-  async get(resource, slug = '') {
-    const res = await axios.get(`${resource}/${slug}`);
+  async get(resource, slug = '', config = {}) {
+    const res = await axios.get(`${resource}/${slug}`, config);
     return res.data;
   },
 
@@ -49,6 +52,6 @@ export const AuthService = {
     return ApiService.post('auth/register', user);
   },
   async user() {
-    return ApiService.get('auth/user');
+    return ApiService.get('auth/user', '', { errorHandle: false });
   },
 };

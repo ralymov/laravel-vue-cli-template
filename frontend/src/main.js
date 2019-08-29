@@ -12,8 +12,20 @@ Vue.mixin(helper);
 
 Vue.config.productionTip = false;
 
-// Ensure we checked auth before each page load.
-router.beforeEach((to, from, next) => Promise.all([store.dispatch(CHECK_AUTH)]).then(next));
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Главная';
+
+  if (to.meta.guestGuard) {
+    next();
+    return;
+  }
+
+  store.dispatch(CHECK_AUTH)
+    .then(() => next)
+    .catch(() => {
+      next({ name: 'login' });
+    });
+});
 
 new Vue({
   router,

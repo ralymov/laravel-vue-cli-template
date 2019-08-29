@@ -3,7 +3,7 @@ import SweetAlert from '../mixins/alert.mixin';
 
 function errorHandler(error) {
   // check for errorHandle config
-  if (error.config.errorHandle && error.config.errorHandle === false) {
+  if (error.config.errorHandle === false) {
     return Promise.reject(error);
   }
 
