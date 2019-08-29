@@ -69,7 +69,6 @@ const actions = {
         ApiService.setHeader();
         AuthService.user()
           .then((user) => {
-            console.log('CHECK_AUTH');
             context.commit(SET_AUTH, user);
             resolve(user);
           })

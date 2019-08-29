@@ -18,7 +18,7 @@
           <span></span>
           <small class="rmb">Remember me</small>
         </label>
-        <a href="#" class="forgetpass">Forget Password?</a>
+        <router-link to="forget-password" class="forgetpass">Forget Password?</router-link>
         <input type="submit" value="Sign in" class="auth-submit-button">
       </form>
 
