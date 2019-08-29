@@ -13,7 +13,6 @@
 </template>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
   @import "sass/app";
 
   body {

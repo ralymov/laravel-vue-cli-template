@@ -21,9 +21,10 @@ router.beforeEach((to, from, next) => {
   }
 
   store.dispatch(CHECK_AUTH)
-    .then(() => next)
+    .then(() => next())
     .catch(() => {
-      next({ name: 'login' });
+      if (to.path !== '/404') next({ name: 'login' });
+      else next();
     });
 });
 
