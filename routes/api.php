@@ -12,7 +12,6 @@
 */
 
 Route::group(['namespace' => 'Api'], static function () {
-
     Route::group(['prefix' => 'auth'], static function () {
         Route::post('login', 'AuthController@login');
         Route::post('register', 'AuthController@register');

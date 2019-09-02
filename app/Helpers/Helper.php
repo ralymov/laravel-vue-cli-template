@@ -13,16 +13,11 @@ if (!function_exists('fill_seeds')) {
 }
 
 if (!function_exists('mb_ucfirst')) {
-    function mb_ucfirst($str, $encoding = NULL)
+    function mb_ucfirst($str, $encoding = null)
     {
-        if ($encoding === NULL) {
+        if ($encoding === null) {
             $encoding = mb_internal_encoding();
         }
         return mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding) . mb_substr($str, 1, null, $encoding);
     }
 }
-
-
-
-
-

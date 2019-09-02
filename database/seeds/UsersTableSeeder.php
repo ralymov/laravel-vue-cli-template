@@ -23,6 +23,4 @@ class UsersTableSeeder extends Seeder
         ];
         fill_seeds($records, User::class, User::FLD_EMAIL);
     }
-
-
 }
