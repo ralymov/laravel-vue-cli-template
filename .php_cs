@@ -18,5 +18,6 @@ return PhpCsFixer\Config::create()
         'single_quote' => true,
         'no_unused_imports' => true,
         'method_chaining_indentation' => true,
+        'binary_operator_spaces' => ['default' => 'single_space'],
     ])
     ->setFinder($finder);
